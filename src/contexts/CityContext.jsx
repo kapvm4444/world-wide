@@ -12,6 +12,7 @@ const DataMode = "live";
 function CityProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({});
 
   useEffect(function () {
     async function getCitiesData() {
@@ -30,8 +31,21 @@ function CityProvider({ children }) {
     getCitiesData();
   }, []);
 
+  async function getCity(id) {
+    try {
+      setIsLoading(true);
+      let data = await fetch(`${BASE_URL[DataMode]}/${id}`);
+      data = await data.json();
+      setCurrentCity(DataMode === "local" ? data : data.data);
+    } catch (err) {
+      alert("Some error occurred while fetching the data! :(");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
-    <CityContext.Provider value={{ cities, isLoading }}>
+    <CityContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
       {children}
     </CityContext.Provider>
   );
