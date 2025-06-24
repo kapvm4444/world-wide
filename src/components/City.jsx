@@ -1,5 +1,6 @@
 import styles from "./City.module.css";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -13,8 +14,7 @@ function City() {
   // const { cityName, emoji, date, notes } = currentCity;
 
   //=> getting the parameters from URL, Dynamic (req.params type shit)
-  const params = useParams();
-  const id = params.id;
+  const { id } = useParams();
 
   //=> getting query parameters (one that starts with "?")
   const [searchParams, setSearchParams] = useSearchParams();
