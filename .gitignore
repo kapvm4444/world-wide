@@ -24,3 +24,5 @@ data
 *.sln
 *.sw?
 *.env
+
+package-lock.json

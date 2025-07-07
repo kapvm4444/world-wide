@@ -7,7 +7,6 @@ import AppLayout from "./pages/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import CityList from "./components/CityList.jsx";
 import CountryList from "./components/CountryList.jsx";
-import { useEffect, useState } from "react";
 import City from "./components/City.jsx";
 import Form from "./components/Form.jsx";
 import { CityProvider } from "./contexts/CityContext.jsx";
