@@ -7,7 +7,7 @@ const BASE_URL = {
   local: "http://localhost:4000/cities",
 };
 
-const DataMode = "live";
+const DataMode = "local";
 
 function CityProvider({ children }) {
   const [cities, setCities] = useState([]);
