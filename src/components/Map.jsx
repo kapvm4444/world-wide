@@ -11,7 +11,7 @@ import {
 import styles from "./Map.module.css";
 import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CityContext";
-import { useGeolocation } from "../hooks/useGeolocation";
+import { useGeolocation } from "../hooks/useGeoLocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import Button from "./Button";
 
