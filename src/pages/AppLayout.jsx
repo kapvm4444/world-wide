@@ -12,7 +12,7 @@ export default function AppLayout() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      return navigate("/");
+      return navigate("/", { replace: true });
     }
   }, [isAuthenticated]);
 

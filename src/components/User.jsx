@@ -17,7 +17,7 @@ function User() {
 
   async function handleClick() {
     logout();
-    navigate("/");
+    navigate("/", { replace: true });
   }
 
   if (!isAuthenticated) {
