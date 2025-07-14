@@ -14,7 +14,7 @@ export default function AppLayout() {
     if (!isAuthenticated) {
       return navigate("/");
     }
-  });
+  }, [isAuthenticated]);
 
   return (
     <div className={styles.app}>
