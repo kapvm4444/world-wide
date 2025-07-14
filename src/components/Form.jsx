@@ -1,5 +1,7 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
+import "react-datepicker/dist/react-datepicker.css";
+
 import { useEffect, useState } from "react";
 
 import styles from "./Form.module.css";
@@ -9,6 +11,8 @@ import BackButton from "./BackButton.jsx";
 import { useUrlPosition } from "../hooks/useUrlPosition.js";
 import Spinner from "./Spinner.jsx";
 import Message from "./Message.jsx";
+import { useCities } from "./../contexts/CityContext.jsx";
+import DatePicker from "react-datepicker";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -29,6 +33,8 @@ function Form() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [geocodingError, setGeocodingError] = useState("");
+
+  const { createCity } = useCities();
 
   useEffect(
     function () {
@@ -63,8 +69,19 @@ function Form() {
 
   const navigate = useNavigate();
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+    };
+
+    await createCity(newCity);
+    navigate("/app/cities");
   }
 
   if (isLoading) return <Spinner />;
@@ -75,7 +92,10 @@ function Form() {
   if (geocodingError) return <Message message={geocodingError} />;
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+      onSubmit={handleSubmit}
+    >
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -88,10 +108,10 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
-          id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+        <DatePicker
+          selected={date}
+          onChange={(date) => setDate(date)}
+          showMonthYearDropdown={true}
         />
       </div>
 
@@ -106,7 +126,7 @@ function Form() {
 
       <div className={styles.buttons}>
         <Button type={"primary"}>Add</Button>
-        <BackButton />
+        <BackButton navigateTo={"/app/cities"} />
       </div>
     </form>
   );
