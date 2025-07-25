@@ -28,6 +28,7 @@ function reducer(state, action) {
 }
 
 function AuthProvider({ children }) {
+  // noinspection JSCheckFunctionSignatures
   const [{ isAuthenticated, user }, dispatch] = useReducer(
     reducer,
     initialState,
@@ -35,10 +36,12 @@ function AuthProvider({ children }) {
 
   function login(email, password) {
     if (email === FAKE_USER.email && password === FAKE_USER.password)
+      // noinspection JSCheckFunctionSignatures
       dispatch({ type: "login", payload: FAKE_USER });
   }
 
   function logout() {
+    // noinspection JSCheckFunctionSignatures
     dispatch({ type: "logout" });
   }
 
