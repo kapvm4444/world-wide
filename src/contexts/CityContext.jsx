@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -90,7 +91,7 @@ function CityProvider({ children }) {
   }, []);
 
   //=> get just ONE CITY: means load the currentCity
-  async function getCity(id) {
+  const getCity = useCallback(async function getCity(id) {
     if (currentCity.id === id) return;
 
     dispatch({ type: "loading", payload: true });
@@ -108,7 +109,7 @@ function CityProvider({ children }) {
         payload: "Some error occurred while fetching the data! :(",
       });
     }
-  }
+  });
 
   //=> CREATE CITY - via form
   async function createCity(newCity) {

@@ -7,6 +7,5 @@ import Sample from "./Sample.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
-    {/*<Sample />*/}
   </React.StrictMode>,
 );
