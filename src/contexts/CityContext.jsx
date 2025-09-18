@@ -14,7 +14,7 @@ const BASE_URL = {
   local: "http://localhost:4000/cities",
 };
 
-const DataMode = "local";
+const DataMode = "live";
 
 const initialState = {
   cities: [],
